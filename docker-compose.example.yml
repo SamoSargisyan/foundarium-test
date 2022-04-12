@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  mysqldb:
+    container_name: foundarium_mysql
+    platform: linux/x86_64
+    image: mysql:8
+    restart: always
+    environment:
+      - MYSQL_PASSWORD=Rxa5DJD4StO3
+      - MYSQL_DATABASE=foundarium
+      - MYSQL_USER=main
+      - MYSQL_ROOT_PASSWORD=gEH8iDlZyTvq
+    ports:
+      - 3306:3306
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+
+  adminer:
+    container_name: foundarium_adminer
+    image: adminer:latest
+    restart: always
+    ports:
+      - 8090:8080
+    depends_on:
+      - mysqldb
+
+  php-fpm:
+    container_name: foundarium_php
+    image: npartyko/php-fpm:8.1
+    restart: always
+    volumes:
+      - ./www:/var/www
+      - ~/.ssh/id_rsa:/root/.ssh/id_rsa
+    working_dir: /var/www/laravel
+    command: php artisan serve --host 0.0.0.0 --port=8000
+    ports:
+      - 8000:8000
+    depends_on:
+      - mysqldb
