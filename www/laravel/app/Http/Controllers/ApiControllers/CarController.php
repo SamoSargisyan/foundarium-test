@@ -13,8 +13,8 @@ class CarController extends Controller
     /**
      * @OA\Get(
      *     path="/api/v1/cars",
-     *     summary="Получить всех пользователей",
-     *     tags={"Пользователи"},
+     *     summary="Получить все автомобили",
+     *     tags={"Автомобили"},
      *     @OA\Parameter(
      *         in="query",
      *         name="page",
