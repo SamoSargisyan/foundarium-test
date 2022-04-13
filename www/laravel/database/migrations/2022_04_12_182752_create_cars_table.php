@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('state_number')
                 ->unique();
             $table->foreignId('user_id')
+                ->nullable()
                 ->constrained();
             $table->softDeletes();
             $table->timestamps();

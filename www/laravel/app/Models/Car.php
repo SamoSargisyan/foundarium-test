@@ -10,4 +10,10 @@ class Car extends Model
 {
     use SoftDeletes;
     use CarRelations;
+
+    protected $fillable = [
+        'state_number',
+        'user_id',
+    ];
+
 }

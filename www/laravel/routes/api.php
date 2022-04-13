@@ -19,7 +19,7 @@ Route::group(
     ['prefix' => 'v1', 'middleware' => 'throttle:120,1'],
     function () {
         Route::group(
-            ['namespace' => 'ApiControllers', 'middleware' => ['pageValidation']],
+            ['namespace' => 'ApiControllers'],
             function () {
                 Route::group(['prefix' => 'users'], function () {
                     Route::get('', [ApiUserController::class, 'index']);
@@ -28,7 +28,8 @@ Route::group(
 
                 Route::group(['prefix' => 'cars'], function () {
                     Route::get('', [ApiCarController::class, 'index']);
-                    Route::get('show', [ApiCarController::class, 'show']);
+                    Route::post('create', [ApiCarController::class, 'create']);
+                    Route::put('update', [ApiCarController::class, 'update']);
                 });
             }
         );

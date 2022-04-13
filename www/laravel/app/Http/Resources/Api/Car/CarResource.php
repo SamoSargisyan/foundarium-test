@@ -9,16 +9,16 @@ class CarResource extends JsonResource
     /**
      * @OA\Schema(schema="CarResource",
      *     @OA\Property(property="id", type="integer", example=1),
-     *     @OA\Property(property="name", type="string", example="name"),
-     *     @OA\Property(property="email", type="string", example="email@mail.com"),
+     *     @OA\Property(property="state_number", type="string", example="o 111 oo 72"),
+     *     @OA\Property(property="user_id", type="integer", example=1),
      * )
      */
     public function toArray($request)
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
+            'state_number' => $this->state_number,
+            'user_id' => $this->user_id,
         ];
     }
 }

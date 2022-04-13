@@ -5,6 +5,13 @@ namespace App\Exceptions;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
+/**
+ * @OA\Schema(schema="ValidationException",
+ *     @OA\Property(property="field", type="string", example="field"),
+ *     @OA\Property(property="message", type="string", example="VALIDATION_EXCEPTION"),
+ *     @OA\Property(property="description", type="string", example="Человеко-понятное описание"),
+ * )
+ */
 class Handler extends ExceptionHandler
 {
     /**
