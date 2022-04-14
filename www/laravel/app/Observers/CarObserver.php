@@ -15,7 +15,12 @@ class CarObserver
      */
     public function created(Car $car)
     {
-        //
+        if ($car->user_id) {
+            CarUser::create([
+                'car_id' => $car->id,
+                'user_id' => $car->user_id,
+            ]);
+        }
     }
 
     /**
