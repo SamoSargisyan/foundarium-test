@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ApiControllers\UserController as ApiUserController;
+use App\Http\Controllers\ApiControllers\CarController as ApiCarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +15,23 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::group(
+    ['prefix' => 'v1', 'middleware' => 'throttle:120,1'],
+    function () {
+        Route::group(
+            ['namespace' => 'ApiControllers'],
+            function () {
+                Route::group(['prefix' => 'users'], function () {
+                    Route::get('', [ApiUserController::class, 'index']);
+                    Route::get('show', [ApiUserController::class, 'show']);
+                });
+
+                Route::group(['prefix' => 'cars'], function () {
+                    Route::get('', [ApiCarController::class, 'index']);
+                    Route::post('create', [ApiCarController::class, 'create']);
+                    Route::put('update', [ApiCarController::class, 'update']);
+                });
+            }
+        );
+    }
+);
